@@ -114,7 +114,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_reset(JNIEnv* env, jcl
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getDevice(JNIEnv* env, jobject instance) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDevice(JNIEnv* env, jobject instance) {
 
 	int diviceCode;
 
@@ -127,7 +127,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getDevice(JNIEnv* env, jobject insta
 	return diviceCode;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getDiviceCount(JNIEnv* env, jobject instance) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDiviceCount(JNIEnv* env, jobject instance) {
 	int diviceCount;
 
 	cudaError_t cudaStatus = cudaGetDeviceCount(&diviceCount);
@@ -139,52 +139,52 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getDiviceCount(JNIEnv* env, jobject 
 	return diviceCount;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags) {
 
 	cudaError_t cudaStatus = cudaInitDevice((int)device, (unsigned int)deviceFlags, (unsigned int)flags);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_lpcCloseMemHandle(JNIEnv* env, jobject instance, jlong devicePtr) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcCloseMemHandle(JNIEnv* env, jobject instance, jlong devicePtr) {
 
 	cudaError_t cudaStatus = cudaIpcCloseMemHandle((void*)devicePtr);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_setDevice(JNIEnv* env, jobject instance, jint device) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDevice(JNIEnv* env, jobject instance, jint device) {
 
 	cudaError_t cudaStatus = cudaSetDevice((int)device);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_setDeviceFlags(JNIEnv* env, jobject instance, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDeviceFlags(JNIEnv* env, jobject instance, jint flags) {
 
 	cudaError_t cudaStatus = cudaSetDeviceFlags((unsigned int)flags);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getErrorName(JNIEnv* env, jobject obj, jint error) {
+JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_getErrorName(JNIEnv* env, jobject obj, jint error) {
 
 	return env->NewStringUTF(cudaGetErrorName(static_cast<cudaError_t>(error)));
 }
 
-JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getErrorString(JNIEnv* env, jobject obj, jint error) {
+JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_getErrorString(JNIEnv* env, jobject obj, jint error) {
 
 	return env->NewStringUTF(cudaGetErrorString(static_cast<cudaError_t>(error)));
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLastError(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getLastError(JNIEnv* env, jobject obj) {
 
 	cudaError_t cudaStatus = cudaGetLastError();
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_peekAtLastError(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_peekAtLastError(JNIEnv* env, jobject obj) {
 
 	cudaError_t cudaStatus = cudaPeekAtLastError();
 
@@ -402,7 +402,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_synchronize(JNIEnv* env
 }
 
 //6.6 External Reource Interoperability
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_destroyExternalMemory(JNIEnv* env, jobject obj, jlong extMem) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_destroyExternalMemory(JNIEnv* env, jobject obj, jlong extMem) {
 
 	cudaExternalMemory_t cudaExternalMemoryPointer = reinterpret_cast<cudaExternalMemory_t>(extMem);
 
@@ -411,7 +411,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_destroyExternalMemory(JNIEnv* env, j
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_destroyExternalSemaphore(JNIEnv* env, jobject obj, jlong extSem) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_destroyExternalSemaphore(JNIEnv* env, jobject obj, jlong extSem) {
 
 	cudaExternalSemaphore_t cudaExternalSemaphorePointer = reinterpret_cast<cudaExternalSemaphore_t>(extSem);
 
@@ -421,7 +421,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_destroyExternalSemaphore(JNIEnv* env
 }
 
 //6.9 Memory Manangement
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, jlong devPtr) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_free(JNIEnv* env, jobject obj, jlong devPtr) {
 
 	void* cudaDevPtr = reinterpret_cast<void*>(devPtr);
 
@@ -430,7 +430,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, jlong
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeArray(JNIEnv* env, jobject obj, jlong array) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_freeArray(JNIEnv* env, jobject obj, jlong array) {
 
 	cudaArray_t cudaArray = reinterpret_cast<cudaArray_t>(array);
 
@@ -439,7 +439,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeArray(JNIEnv* env, jobject obj, 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeHost(JNIEnv* env, jobject obj, jlong ptr) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_freeHost(JNIEnv* env, jobject obj, jlong ptr) {
 
 	void* cudaPtr = reinterpret_cast<void*>(ptr);
 
@@ -448,7 +448,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeHost(JNIEnv* env, jobject obj, j
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeMipmappedArray(JNIEnv* env, jobject obj, jlong mipMappedArray) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_freeMipmappedArray(JNIEnv* env, jobject obj, jlong mipMappedArray) {
 
 	cudaMipmappedArray_t cudaMipMappedArray = reinterpret_cast<cudaMipmappedArray_t>(mipMappedArray);
 
@@ -457,7 +457,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeMipmappedArray(JNIEnv* env, jobj
 	return cudaStatus;
 
 }
-JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostAlloc(JNIEnv* env, jobject obj, jsize size, jint flags) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_hostAlloc(JNIEnv* env, jobject obj, jsize size, jint flags) {
 
 	void* cudaPHost;
 
@@ -476,7 +476,7 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostAlloc(JNIEnv* env, jobject obj,
 //__host__​cudaError_t cudaGetSymbolSize(size_t* size, const void* symbol)
 
 
-JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostRegister(JNIEnv* env, jobject obj, jsize size, jint flags) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_hostRegister(JNIEnv* env, jobject obj, jsize size, jint flags) {
 	
 	void* cudaPtr;
 
@@ -489,7 +489,7 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostRegister(JNIEnv* env, jobject o
 	return (jlong)cudaPtr;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject obj, jlong ptr) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_hostUnregister(JNIEnv* env, jobject obj, jlong ptr) {
 
 	void* cudaPtr = reinterpret_cast<void*>(ptr);
 
@@ -498,7 +498,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject 
 	return cudaStatus;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_malloc(JNIEnv* env, jobject obj, jsize size) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_malloc(JNIEnv* env, jobject obj, jsize size) {
 
 	void* cudaDevPtr;
 
@@ -515,7 +515,7 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_malloc(JNIEnv* env, jobject obj, js
 	//__host__​cudaError_t cudaMalloc3DArray(cudaArray_t * array, const cudaChannelFormatDesc * desc, cudaExtent extent, unsigned int  flags = 0)
 	//__host__​cudaError_t cudaMallocArray(cudaArray_t * array, const cudaChannelFormatDesc * desc, size_t width, size_t height = 0, unsigned int  flags = 0)
 
-JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_mallocHost(JNIEnv* env, jobject obj, jsize size) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_mallocHost(JNIEnv* env, jobject obj, jsize size) {
 	void* cudaPtr;
 
 	cudaError_t cudaStatus = cudaMallocHost(&cudaPtr, (size_t)size);
@@ -528,7 +528,7 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_mallocHost(JNIEnv* env, jobject obj
 }
 
 //6.13  Peer Device Memory Access
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceCanAccessPeer(JNIEnv* env, jobject obj, jint  device, jint  peerDevice) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceCanAccessPeer(JNIEnv* env, jobject obj, jint  device, jint  peerDevice) {
 	int canAccessPeer;
 
 	cudaError_t cudaStatus = cudaDeviceCanAccessPeer(&canAccessPeer, (int)device, (int)peerDevice);
@@ -540,14 +540,14 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceCanAccessPeer(JNIEnv* env, job
 	return canAccessPeer;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceDisablePeerAccess(JNIEnv* env, jobject obj, jint peerDevice) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceDisablePeerAccess(JNIEnv* env, jobject obj, jint peerDevice) {
 	
 	cudaError_t cudaStatus = cudaDeviceDisablePeerAccess((int)peerDevice);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceEnablePeerAccess(JNIEnv* env, jobject obj, jint  peerDevice, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceEnablePeerAccess(JNIEnv* env, jobject obj, jint  peerDevice, jint flags) {
 	
 	cudaError_t cudaStatus = cudaDeviceEnablePeerAccess((int)peerDevice, (unsigned int)flags);
 
@@ -556,7 +556,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceEnablePeerAccess(JNIEnv* env, 
 
 
 //6.27 Version Management
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj) {
 
 	int driverVersion;
 
@@ -569,7 +569,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobjec
 	return driverVersion;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_runtimeGetVersion(JNIEnv* env, jobject instance) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_runtimeGetVersion(JNIEnv* env, jobject instance) {
 
 	int runtimeVersion;
 
